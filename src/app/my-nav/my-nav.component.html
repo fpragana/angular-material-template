@@ -1,0 +1,51 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #appDrawer class="sidenav" fixedInViewport="true"
+      [ngStyle]="{ 'width.em': sidenavWidth }"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)"
+      (mouseenter)="isOpen=true"
+      (mouseleave)="isOpen=false"
+      [@openClose]="isOpen ? 'open' : 'closed'">
+    <mat-toolbar color="primary"></mat-toolbar>
+    <mat-nav-list>
+      <app-menu-list-item *ngFor="let item of navItems" [item]=item  [isOpen]=isOpen></app-menu-list-item>
+      <!--<mat-list-item routerLink="/first-page" routerLinkActive="active" >
+        <mat-icon md-list-icon>link</mat-icon>
+        <div fxFlex="10"></div>
+        <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+          <h5>Página 1</h5>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="/second-page" routerLinkActive="active" >
+        <mat-icon md-list-icon>link</mat-icon>
+        <div fxFlex="10"></div>
+        <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+          <h5>Página 2</h5>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="/third-page" routerLinkActive="active" >
+        <mat-icon md-list-icon>link</mat-icon>
+        <div fxFlex="10"></div>
+        <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+          <h5>Página 3</h5>
+        </div>
+      </mat-list-item>-->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Sistema de Gestão ABC</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
